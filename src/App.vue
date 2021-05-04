@@ -1,20 +1,20 @@
 <template>
-  <main id="" :class="{ dark: dark == true, light: dark == false }">
+  <main :class="{ dark: dark == true, light: dark == false }">
     
     <div class="container">
       <header class="options">
         <h1>TODO</h1>
-        <a @click.prevent="toggleTheme()" href="">
-          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26"><path fill="#FFF" fill-rule="evenodd" d="M13 21a1 1 0 011 1v3a1 1 0 11-2 0v-3a1 1 0 011-1zm-5.657-2.343a1 1 0 010 1.414l-2.121 2.121a1 1 0 01-1.414-1.414l2.12-2.121a1 1 0 011.415 0zm12.728 0l2.121 2.121a1 1 0 01-1.414 1.414l-2.121-2.12a1 1 0 011.414-1.415zM13 8a5 5 0 110 10 5 5 0 010-10zm12 4a1 1 0 110 2h-3a1 1 0 110-2h3zM4 12a1 1 0 110 2H1a1 1 0 110-2h3zm18.192-8.192a1 1 0 010 1.414l-2.12 2.121a1 1 0 01-1.415-1.414l2.121-2.121a1 1 0 011.414 0zm-16.97 0l2.121 2.12A1 1 0 015.93 7.344L3.808 5.222a1 1 0 011.414-1.414zM13 0a1 1 0 011 1v3a1 1 0 11-2 0V1a1 1 0 011-1z"/></svg>
+        <a class="toggleTheme" @click.prevent="toggleTheme()" href="">
+          
         </a>
         
       </header>
       <div class="list_form">
-          <div class="check_list">
+          <div class="list_form_circle">
             <svg xmlns="http://www.w3.org/2000/svg" width="11" height="9"><path fill="none" stroke="#FFF" stroke-width="2" d="M1 4.304L3.696 7l6-6"/></svg>
           </div>
           <div class="" @keydown.prevent.enter="addNewList">
-            <input type="text" v-model="itemNew" ref="new" autofocus placeholder="What needs to be done">
+            <input type="text" v-model="itemNew" ref="new" autofocus placeholder="Create a new todo...">
           </div>
           <div class="delete_list">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"><path fill="#494C6B" fill-rule="evenodd" d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"/></svg>
@@ -23,7 +23,7 @@
 
 
       
-      <transition-group name="card" tag="ul">
+      <transition-group name="card" tag="ul" class="list_card">
         <li class="item_list" v-for="(item, index) in itemsFiltered" :key="item.id">
           <div class="check_list">
             <a 
@@ -175,10 +175,68 @@ export default {
 </script>
 
 <style lang="scss">
+// dark theme
+.dark {
+  background-color: hsl(235, 21%, 11%);
+  background-image: url('./assets/images/bg-desktop-dark.jpg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  .toggleTheme {
+    width: 26px;
+    height: 26px;
+    background-image: url('./assets/images/icon-sun.svg');
+  }
+}
+.light {
+  background-color: hsl(0, 0%, 98%);
+  background-image: url('./assets/images/bg-desktop-light.jpg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  .toggleTheme {
+    width: 26px;
+    height: 26px;
+    background-image: url('./assets/images/icon-moon.svg');
+  }
+  .list_form {
+    background-color: #fff;
+    input::placeholder {
+      color: hsl(236, 9%, 61%);
+    }
+    input {
+      color: hsl(235, 19%, 35%);
+    }
+  }
+  .check_list svg {
+    border: 1px solid hsl(233, 11%, 84%);
+  }
+  .check_list svg:hover {
+    border: 1px solid hsl(235, 19%, 35%);
+  }
+  .item_list {
+    background-color: #fff;
+    border-bottom: 1px solid hsl(236, 33%, 92%);
+  }
+  .active {
+    color: hsl(220, 98%, 61%);
+  }
+  .items_info {
+    background-color: #fff;
+    color: hsl(235, 19%, 35%);
+    font: 400;
+   
+  }
+  .text_list {
+    color: hsl(235, 19%, 35%);
+  }
+  .completed {
+    color: hsl(236, 33%, 92%);
+  }
+}
+// options
 body {
   margin: 0;
-  color: hsl(236, 33%, 92%);
   font-size: 18px;
+  font-family: 'Josefin Sans', sans-serif;
 }
 ul {
   margin: 0;
@@ -192,33 +250,41 @@ ul li {
 main {
   width: 100vw;
   height: 100vh;
-  background-color: hsl(235, 21%, 11%);
-  background-image: url('./assets/images/bg-desktop-dark.jpg');
-  background-repeat: no-repeat;
-  background-size: contain;
-  display: flex;
-  align-items: center;
+  color: hsl(236, 33%, 92%);
+
+
 }
 .container {
-  width: 40%;
+  position: relative;
+  top: 5rem;
+  min-width: 450px;
+  max-width: 40%;
   height: auto;
   margin: 0 auto; 
   svg path {
     stroke: transparent;
   }
-  
+}
+.list_card {
+  --tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 .options {
-  padding: 0 0.5rem;
+  margin-bottom: 1rem;
+  
   display: flex;
   align-items: center;
   justify-content: space-between;
+  h1 {
+    letter-spacing: 1rem;
+  }
 }
 .item_list {
   display: flex;
   align-items: center;
   border-bottom: 1px solid hsl(235, 19%, 35%);
   background-color: hsl(235, 24%, 19%);
+  cursor: pointer;
 }
 .item_list:first-child {
   border-top-left-radius: 0.5rem;
@@ -228,14 +294,29 @@ main {
 .item_list:hover .delete_list svg path {
   fill: hsl(235, 19%, 35%);
 }
+.list_form_circle {
+  width: 10%;
+  text-align: center;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  svg {
+    padding: 0.5rem 0.5rem;
+    border-radius: 100%;
+    border: 1px solid hsl(235, 19%, 35%);
+    
+  }
+}
 .check_list {
   width: 10%;
   text-align: center;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
   svg {
     padding: 0.5rem 0.5rem;
     border-radius: 100%;
     border: 1px solid hsl(235, 19%, 35%);
     cursor: pointer;
+    
   }
   svg:hover {
     border: 1px solid #fff;
@@ -273,6 +354,8 @@ main {
   display: flex;
   align-items: center;
   background-color: hsl(235, 24%, 19%);
+  --tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
   h1 {
     width: 20%;
     font-size: 0.7rem;
@@ -304,17 +387,24 @@ main {
   background-color: hsl(235, 24%, 19%);
   margin-bottom: 1.5rem;
   border-radius: 0.5rem;
-  
+  --tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
   form {
     width: 100%;
   }
+  
   input {
     color: white;
-    font-size: 1rem;
+    font-size: 1.2rem;
     width: 95%;
     background-color: transparent;
     border: none;
     padding: 1rem 0;
+    font-family: 'Josefin Sans', sans-serif;
+    
+  }
+  input::placeholder {
+    color: hsl(233, 14%, 35%);
   }
   .delete_list {
     width: 10%;
