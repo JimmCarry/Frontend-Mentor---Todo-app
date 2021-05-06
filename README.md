@@ -9,7 +9,6 @@ This is a solution to the [Todo app challenge on Frontend Mentor](https://www.fr
   - [Screenshot](#screenshot)
   - [Links](#links)
   - [Built with](#built-with)
-  - [What I learned](#what-i-learned)
 - [Author](#author)
 
 ## Overview
@@ -35,8 +34,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: https://codesandbox.io/s/intro-component-with-sign-up-form-forked-41fjx
 
 ### Built with
 
@@ -45,15 +43,6 @@ Users should be able to:
 - Flexbox
 - CSS Grid
 - [Vuejs](https://v3.vuejs.org/) - JavaScript Framework
-
-**Note: These are just examples. Delete this note and replace the list above with your own choices**
-
-### What I learned
-
-### Useful resources
-
-- [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
 
 ## Author
 
